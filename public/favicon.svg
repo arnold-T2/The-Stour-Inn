@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="14" fill="#2e3192" />
+  <rect x="4" y="4" width="56" height="56" rx="10" fill="none" stroke="#f7f2e6" stroke-opacity="0.5" stroke-width="1.5" />
+  <!-- pint glass -->
+  <path
+    d="M22 14h20l-2.5 36a4 4 0 0 1-4 3.6h-7a4 4 0 0 1-4-3.6L22 14z"
+    fill="none"
+    stroke="#f7f2e6"
+    stroke-width="3"
+    stroke-linejoin="round"
+  />
+  <!-- beer + foam -->
+  <path d="M24.4 26h15.2l-1.7 24a2 2 0 0 1-2 1.9h-7.8a2 2 0 0 1-2-1.9l-1.7-24z" fill="#c9a84a" />
+  <path d="M23.6 20h16.8l-.4 5H24l-.4-5z" fill="#f7f2e6" />
+</svg>
