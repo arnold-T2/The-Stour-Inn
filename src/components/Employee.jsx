@@ -7,63 +7,95 @@ const WINNERS = [
   {
     month: "July 2026",
     img: "/eom/watermelon.jpeg",
-    title: "Produce Procurement Excellence",
-    citation:
-      "Personally vetted every watermelon in Dorset for the summer specials. None of them made the menu. The melon has since been promoted above two members of staff.",
+    title: "Watermelon Quality Control",
+    citation: [
+      "Personally vetted every melon in Dorset.",
+      "None were aesthetically pleasing enough for the menu.",
+    ],
   },
   {
     month: "June 2026",
     img: "/eom/upsidedown.jpeg",
-    title: "Innovation in Workplace Posture",
-    citation:
-      "Redefined what it means to work 'flat out'. Found like this in the stockroom halfway through a Saturday rush. When questioned, described it as 'stocktaking'.",
+    title: "Innovative Working Posture",
+    citation: ["Redefined “flat out”."],
   },
   {
     month: "May 2026",
     img: "/eom/plant.jpeg",
-    title: "Beer Garden Expansion Project",
-    citation:
-      "Led the ambitious beer garden refurbishment. One (1) plant was purchased. It is somehow doing better than the rest of the team.",
+    title: "Beer Garden Procurement",
+    citation: [
+      "Got lonely behind the bar, so bought a plant.",
+      "Promoted it to assistant manager.",
+    ],
   },
   {
     month: "April 2026",
     img: "/eom/poncho.jpeg",
     title: "Cellar Leak Investigation",
-    citation:
-      "Went above and beyond investigating a leak in the cellar. The leak won. Awarded for bravery, and for not letting go of her drink at any point.",
+    citation: [
+      "Went above and beyond investigating a leak in the cellar.",
+      "The leak won. Awarded for bravery.",
+    ],
   },
   {
     month: "March 2026",
     img: "/eom/trolley.jpeg",
-    title: "Heroic Cash & Carry Run",
-    citation:
-      "Volunteered for the weekly supplies run. Returned with flowers, snacks and a suspiciously personal shopping list. Zero (0) items from the actual list were acquired.",
+    title: "Cash & Carry Run",
+    citation: [
+      "Sent for stock. Came back with flowers.",
+      "Zero items from the actual list were acquired.",
+    ],
   },
   {
     month: "February 2026",
     img: "/eom/sword.jpeg",
-    title: "Conflict De-escalation Training",
-    citation:
-      "Completed the February de-escalation course with flying colours. Pictured here de-escalating. The wrapping paper made a full recovery.",
+    title: "Conflict Resolution",
+    citation: [
+      "Dealt with a rude customer using elite de-escalation techniques.",
+      "The customer never returned.",
+    ],
   },
   {
     month: "January 2026",
     img: "/eom/nap.jpeg",
-    title: "Quality Control: Guest Transport",
-    citation:
-      "January's rota hit hard. Caught personally inspecting the comfort of the guest transport — with her eyes closed, for accuracy. Very thorough. Very asleep.",
+    title: "Recovery Siestas",
+    citation: [
+      "Spent all of January recovering from December.",
+      "This nap was the halfway point.",
+    ],
   },
   {
     month: "December 2025",
     img: "/eom/backpack.jpeg",
-    title: "Christmas Stock Logistics",
-    citation:
-      "Single-handedly volunteered to carry the entire Christmas stock order. The backpack cost £25. The look of pure confidence: priceless.",
+    title: "Retention Success Story",
+    citation: [
+      "Worked flat out through our busiest month.",
+      "Tried to run away.",
+      "Remembered we're her home.",
+    ],
+  },
+  {
+    month: "November 2025",
+    img: "/eom/gym.jpeg",
+    title: "Barrel-Lifting Fitness Plan",
+    citation: [
+      "Started training to lift a full beer barrel unassisted.",
+      "Still quite a way off.",
+    ],
+  },
+  {
+    month: "October 2025",
+    img: "/eom/baking.jpeg",
+    title: "In-House Bakery Trial",
+    citation: [
+      "Volunteered to bake for the pub.",
+      "Ate everything before it reached the counter.",
+    ],
   },
 ];
 
 const ROTATE_MS = 6000;
-const MANUAL_HOLD_MS = 15000; // clicking a month pauses the auto-cycle for a bit
+const MANUAL_HOLD_MS = 3000; // clicking a month pauses the auto-cycle for a bit
 
 export default function Employee() {
   const [index, setIndex] = useState(0);
@@ -85,6 +117,8 @@ export default function Employee() {
   }, []);
 
   const winner = WINNERS[index];
+  const prevIndex = (index - 1 + WINNERS.length) % WINNERS.length;
+  const nextIndex = (index + 1) % WINNERS.length;
 
   return (
     <section className="section employee" id="employee">
@@ -92,8 +126,9 @@ export default function Employee() {
         <p className="section__eyebrow">Hall of fame</p>
         <h2 className="section__title">Employee of the Month</h2>
         <p className="section__lead">
-          Voted for anonymously and counted independently by the manager. The
-          manager is Tia. We&apos;re sure that&apos;s fine.
+          Voted for anonymously and counted independently by the manager.
+          <br />
+          The manager is Tia...
         </p>
 
         <div className="employee__inner">
@@ -105,6 +140,22 @@ export default function Employee() {
                 alt={`Tia — Employee of the Month, ${winner.month}`}
               />
               <span className="plaque__shine" aria-hidden="true" />
+              <button
+                type="button"
+                className="plaque__arrow plaque__arrow--prev"
+                aria-label={`Previous month: ${WINNERS[prevIndex].month}`}
+                onClick={() => pick(prevIndex)}
+              >
+                &lsaquo;
+              </button>
+              <button
+                type="button"
+                className="plaque__arrow plaque__arrow--next"
+                aria-label={`Next month: ${WINNERS[nextIndex].month}`}
+                onClick={() => pick(nextIndex)}
+              >
+                &rsaquo;
+              </button>
             </div>
             <figcaption className="plaque__plate">
               <span className="plaque__month">{winner.month}</span>
@@ -118,32 +169,47 @@ export default function Employee() {
               🏆 {WINNERS.length} consecutive wins &mdash; a Stour Inn record
             </p>
             <p className="employee__citation" key={`citation-${winner.month}`}>
-              {winner.citation}
+              {winner.citation.map((line, i) => (
+                <span className="employee__citation-line" key={i}>
+                  {line}
+                </span>
+              ))}
             </p>
 
             <div
               className="employee__months"
               role="tablist"
-              aria-label="Past winners"
+              aria-label="Past winners — hover or tap a month to reveal the photo"
             >
-              {WINNERS.map((w, i) => (
-                <button
-                  key={w.month}
-                  role="tab"
-                  aria-selected={i === index}
-                  className={`employee__thumb ${i === index ? "is-active" : ""}`}
-                  onClick={() => pick(i)}
-                >
-                  <img src={w.img} alt="" loading="lazy" />
-                  <span>{w.month.split(" ")[0].slice(0, 3)}</span>
-                </button>
-              ))}
+              {WINNERS.map((w, i) => {
+                const [monthName, year] = w.month.split(" ");
+                return (
+                  <button
+                    key={w.month}
+                    role="tab"
+                    aria-selected={i === index}
+                    aria-label={`${w.month} winner`}
+                    className={`employee__thumb ${i === index ? "is-active" : ""}`}
+                    onPointerEnter={(e) => {
+                      // Desktop mice can just hover across the row; touch
+                      // taps fall through to onClick below instead.
+                      if (e.pointerType === "mouse") pick(i);
+                    }}
+                    onClick={() => pick(i)}
+                  >
+                    <span className="employee__thumb-month">
+                      {monthName.slice(0, 3)}
+                    </span>
+                    <span className="employee__thumb-year">
+                      &rsquo;{year.slice(2)}
+                    </span>
+                  </button>
+                );
+              })}
             </div>
 
             <p className="employee__smallprint">
               Runners-up will be announced as soon as there are any.
-              Judges&apos; decision is final, unanimous, and not remotely open
-              to appeal.
             </p>
           </div>
         </div>

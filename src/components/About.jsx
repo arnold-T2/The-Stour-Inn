@@ -13,28 +13,29 @@ export default function About() {
           <p className="section__eyebrow">About us</p>
           <h2 className="section__title">Your Local by the Stour</h2>
           <p className="about__lead">
-            The Stour Inn is a proper village pub in Blandford St Mary, just
-            over the bridge from Blandford Forum. Expect well-kept local ales, a
-            menu cooked fresh in our kitchen, and an &lsquo;olde worlde&rsquo;
-            bar that hasn&apos;t changed for the sake of it.
+            The Stour Inn sits in Blandford St Mary, just over the bridge from
+            Blandford Forum.
+          </p>
+          <p className="about__lead">
+            We keep our ales well and cook everything fresh in our own kitchen —
+            nothing fancy, just done properly.
           </p>
           <p className="about__lead">
             Families are welcome, dogs are practically encouraged, and the beer
             garden is the best seat in the house when the sun&apos;s out.
-            Whether it&apos;s a pint after work, Sunday lunch with the family or
-            just somewhere warm to park yourself for the afternoon — you&apos;ll
-            fit right in.
           </p>
 
           <aside className="about__aside">
             <h3>The small print</h3>
+            <p>Fair warning: the bar team are a lovely bunch of oddballs.</p>
             <p>
-              Fair warning: the bar team are a lovely bunch of oddballs. We hire
-              on personality rather than polish, and honestly, it shows. Be
-              patient with them — some are still working out which end of the
-              glass the beer goes in. They&apos;re family, and we&apos;re
-              keeping them.
+              We hire on personality rather than polish, and honestly, it shows.
             </p>
+            <p>
+              Be patient with them — some are still working out which end of the
+              glass the beer goes in.
+            </p>
+            <p>They&apos;re family, and we&apos;re keeping them.</p>
           </aside>
         </div>
 

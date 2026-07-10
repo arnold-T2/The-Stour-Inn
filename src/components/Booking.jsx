@@ -37,8 +37,9 @@ export default function Booking() {
         <p className="section__eyebrow">Reserve your spot</p>
         <h2 className="section__title">Book a Table</h2>
         <p className="section__lead">
-          Tell us when you&apos;re coming and how many of you there are &mdash;
-          we&apos;ll have the table (and the menus) ready.
+          Tell us when you&apos;re coming and how many of you there are.
+          <br />
+          We&apos;ll call or email to confirm your table.
         </p>
 
         <form className="booking__form" onSubmit={submit}>
@@ -49,6 +50,15 @@ export default function Booking() {
           <label className="booking__field">
             <span>Phone</span>
             <input type="tel" name="phone" placeholder="Your number" required />
+          </label>
+          <label className="booking__field booking__field--wide">
+            <span>Email</span>
+            <input
+              type="email"
+              name="email"
+              placeholder="you@example.com"
+              required
+            />
           </label>
           <label className="booking__field">
             <span>Date</span>
@@ -64,7 +74,7 @@ export default function Booking() {
               ))}
             </select>
           </label>
-          <label className="booking__field">
+          <label className="booking__field booking__field--wide">
             <span>Party size</span>
             <select name="party" defaultValue="2" required>
               {[1, 2, 3, 4, 5, 6, 7].map((n) => (

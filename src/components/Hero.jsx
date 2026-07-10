@@ -32,6 +32,7 @@ export default function Hero() {
           <li>Dog Friendly</li>
           <li>Beer Garden</li>
           <li>Real Ales</li>
+          <li>Tia Approved</li>
         </ul>
 
         <div className="hero__actions">

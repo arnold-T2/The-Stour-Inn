@@ -35,9 +35,10 @@ export default function Footer() {
 
         <div className="footer__col">
           <h4>The essentials</h4>
-          <span>Family friendly &middot; Dog friendly</span>
+          <span>Family friendly &middot; Dog friendly </span>
           <span>Beer garden &middot; Real ales</span>
-          <span>Freddos still 39p</span>
+          <span>Freddos still 39p </span>
+          <span>Tia&apos;s presence</span>
         </div>
       </div>
 

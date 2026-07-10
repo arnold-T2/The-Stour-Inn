@@ -21,6 +21,15 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Close the mobile menu the moment the user starts scrolling, so it
+  // doesn't stay pinned open over the page.
+  useEffect(() => {
+    if (!open) return undefined;
+    const onScroll = () => setOpen(false);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [open]);
+
   return (
     <header className={`nav ${scrolled || open ? "is-scrolled" : ""}`}>
       <div className="nav__inner container">

@@ -54,6 +54,7 @@ const TABS = [
         tags: ["VE", "GF"],
         price: "£7.5",
         desc: "Smoked sea salt, malt vinegar powder.",
+        tiaFave: true,
       },
     ],
   },
@@ -72,6 +73,7 @@ const TABS = [
         tags: [],
         price: "£19",
         desc: "Butterflied chicken breast, cheese, garlic mayo, shredded lettuce, KFC-style dipping gravy, fries.",
+        tiaFave: true,
       },
       {
         name: "Stour Burger",
@@ -104,8 +106,20 @@ const TABS = [
     label: "Sides & Nibbles",
     items: [
       { name: "Fries", tags: [], price: "£4", desc: "" },
-      { name: "Chunky Chips", tags: [], price: "£4", desc: "" },
-      { name: "Cajun Fries", tags: [], price: "£5", desc: "" },
+      {
+        name: "Chunky Chips",
+        tags: [],
+        price: "£4",
+        desc: "",
+        tiaFave: true,
+      },
+      {
+        name: "Cajun Fries",
+        tags: [],
+        price: "£5",
+        desc: "",
+        tiaFave: true,
+      },
       { name: "Cheesy Chunky Chips", tags: [], price: "£5", desc: "" },
       { name: "Garlic Ciabatta", tags: [], price: "£4", desc: "" },
       { name: "Cheesy Garlic Ciabatta", tags: [], price: "£5", desc: "" },
@@ -149,29 +163,50 @@ const TABS = [
 
 export default function Menu() {
   const [active, setActive] = useState(0);
+  // Once the user has switched tabs at least once, they've got the
+  // hang of it — the nudge hint animation can stop.
+  const [hasInteracted, setHasInteracted] = useState(false);
   const [ref, inView] = useInView({ once: true, threshold: 0.1 });
   const tab = TABS[active];
+
+  const selectTab = (i) => {
+    setActive(i);
+    setHasInteracted(true);
+  };
 
   return (
     <section className="section section--alt menu" id="menu">
       <div className="container">
         <p className="section__eyebrow">From the kitchen</p>
         <h2 className="section__title">The Menu</h2>
-        <p className="section__lead">
-          Cooked fresh, priced fairly. Food served 6&ndash;9pm Wednesday &amp;
-          Thursday, 5:30&ndash;9pm Friday &amp; Saturday, and our Sunday menu
-          runs 12 noon&ndash;5pm.
-        </p>
+        <p className="section__lead">Cooked fresh, priced fairly.</p>
+
+        <ul className="menu__hours" aria-label="Kitchen hours">
+          <li>
+            <strong>Wed&ndash;Thu</strong> 6&ndash;9pm
+          </li>
+          <li>
+            <strong>Fri&ndash;Sat</strong> 5:30&ndash;9pm
+          </li>
+          <li>
+            <strong>Sun</strong> 12&ndash;5pm
+          </li>
+        </ul>
 
         <div className={`menu__panel ${inView ? "is-in" : ""}`} ref={ref}>
-          <div className="menu__tabs" role="tablist" aria-label="Menu sections">
+          <div
+            className={`menu__tabs ${hasInteracted ? "has-interacted" : ""}`}
+            role="tablist"
+            aria-label="Menu sections"
+          >
             {TABS.map((t, i) => (
               <button
                 key={t.id}
                 role="tab"
                 aria-selected={i === active}
+                style={{ "--i": i }}
                 className={`menu__tab ${i === active ? "is-active" : ""}`}
-                onClick={() => setActive(i)}
+                onClick={() => selectTab(i)}
               >
                 {t.label}
               </button>
@@ -180,7 +215,9 @@ export default function Menu() {
               className="menu__indicator"
               style={{ transform: `translateX(${active * 100}%)` }}
               aria-hidden="true"
-            />
+            >
+              <span className="menu__indicator-inner" />
+            </span>
           </div>
 
           {/* Key on the tab id so the stagger animation replays on switch. */}
@@ -196,6 +233,14 @@ export default function Menu() {
                         {tag}
                       </span>
                     ))}
+                    {item.tiaFave && (
+                      <span
+                        className="menu-item__fave"
+                        title="Tia can never decide"
+                      >
+                        &#9733; Tia&apos;s Fave
+                      </span>
+                    )}
                   </h3>
                   <span className="menu-item__dots" aria-hidden="true" />
                   <span className="menu-item__price">{item.price}</span>
@@ -205,11 +250,17 @@ export default function Menu() {
             ))}
           </div>
 
-          <p className="menu__note">
-            (V) Vegetarian &middot; (VE) Vegan &middot; (GF) Gluten Free. Please
-            speak to a member of staff if you have any food allergies or
-            intolerances before making your order.
-          </p>
+          <div className="menu__note">
+            <p className="menu__legend">
+              <span>(V) Vegetarian</span>
+              <span>(VE) Vegan</span>
+              <span>(GF) Gluten Free</span>
+            </p>
+            <p className="menu__allergy">
+              We can cater to most allergies and intolerances &mdash; just let
+              us know when you visit.
+            </p>
+          </div>
         </div>
       </div>
     </section>

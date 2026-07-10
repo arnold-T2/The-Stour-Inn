@@ -43,6 +43,10 @@ export default function Visit() {
                 <dt>Sunday menu</dt>
                 <dd>12 noon &ndash; 5pm</dd>
               </div>
+              <div>
+                <dt>Tia&apos;s mood</dt>
+                <dd>Variable</dd>
+              </div>
             </dl>
             <p className="visit__hint">
               Hours can shift with the seasons — check our Instagram for the
