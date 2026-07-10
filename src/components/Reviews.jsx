@@ -34,8 +34,7 @@ const REVIEWS = [
 ];
 
 const ROTATE_MS = 5500;
-const MANUAL_PAUSE_MS = 4000; // arrow click holds off the auto-advance briefly
-const FIRST_DWELL_MS = 4000; // extra time on Tia's review before it starts moving
+const MANUAL_PAUSE_MS = 3000; // arrow click holds off the auto-advance briefly
 
 export default function Reviews() {
   const [index, setIndex] = useState(0);
@@ -47,16 +46,10 @@ export default function Reviews() {
 
   useEffect(() => {
     if (!inView) return undefined;
-    let intervalId;
-    const startTimer = setTimeout(() => {
-      intervalId = setInterval(() => {
-        if (!paused.current) setIndex((i) => (i + 1) % REVIEWS.length);
-      }, ROTATE_MS);
-    }, FIRST_DWELL_MS);
-    return () => {
-      clearTimeout(startTimer);
-      clearInterval(intervalId);
-    };
+    const id = setInterval(() => {
+      if (!paused.current) setIndex((i) => (i + 1) % REVIEWS.length);
+    }, ROTATE_MS);
+    return () => clearInterval(id);
   }, [inView]);
 
   useEffect(() => () => clearTimeout(resumeTimer.current), []);
