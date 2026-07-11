@@ -29,7 +29,8 @@ export default function About() {
             <h3>The small print</h3>
             <p>Fair warning: the bar team are a lovely bunch of oddballs.</p>
             <p>
-              We hire on personality rather than polish, and honestly, it shows.
+              We hire for personality, not experience &mdash; and honestly, it
+              shows.
             </p>
             <p>
               Be patient with them — some are still working out which end of the
