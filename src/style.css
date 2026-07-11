@@ -1622,6 +1622,11 @@ a {
     display: none;
   }
   .menu__tab.is-active {
+    /* Static, not animation-driven — the active tab must stay visible
+       even after the nudge below is switched to animation: none, which
+       otherwise wipes out the opacity that only the animation was
+       providing and leaves the tab stuck at the base opacity: 0. */
+    opacity: 1;
     background: linear-gradient(160deg, var(--blue) 0%, var(--blue-dark) 100%);
     box-shadow: 0 8px 18px -8px rgba(28, 31, 99, 0.6);
   }
